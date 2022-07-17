@@ -1,0 +1,96 @@
+{
+	"name": "vscode-auto-timestamp",
+	"displayName": "Auto Time Stamp",
+	"description": "Update timestamp in file content on save",
+	"version": "0.0.4",
+	"publisher": "lpubsppop01",
+	"license": "Zlib",
+	"engines": {
+		"vscode": "^1.18.0"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/lpubsppop01/vscode-auto-timestamp.git"
+	},
+	"bugs": {
+		"url": "https://github.com/lpubsppop01/vscode-auto-timestamp/issues",
+		"email": "lpubsppop01@gmail.com"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"*"
+	],
+	"main": "./out/extension",
+	"contributes": {
+		"configuration": [
+			{
+				"title": "Auto Time Stamp",
+				"type": "object",
+				"properties": {
+					"lpubsppop01.autoTimeStamp.filenamePattern": {
+						"description": "%filenamePattern.description%",
+						"type": "string",
+						"default": ".*"
+					},
+					"lpubsppop01.autoTimeStamp.lineLimit": {
+						"description": "%lineLimit.description%",
+						"type": "integer",
+						"default": 10
+					},
+					"lpubsppop01.autoTimeStamp.birthTimeStart": {
+						"description": "%birthTimeStart.description%",
+						"type": "string",
+						"default": "[cC]reated[ -][tT]ime.*: "
+					},
+					"lpubsppop01.autoTimeStamp.birthTimeEnd": {
+						"description": "%birthTimeEnd.description%",
+						"type": "string",
+						"default": "$"
+					},
+					"lpubsppop01.autoTimeStamp.modifiedTimeStart": {
+						"description": "%modifiedTimeStart.description%",
+						"type": "string",
+						"default": "[lL]ast[ -][mM]odified[ -][tT]ime.*: "
+					},
+					"lpubsppop01.autoTimeStamp.modifiedTimeEnd": {
+						"description": "%modifiedTimeEnd.description%",
+						"type": "string",
+						"default": "$"
+					},
+					"lpubsppop01.autoTimeStamp.momentFormat": {
+						"description": "%momentFormat.description%",
+						"type": "string",
+						"default": "YYYY-MM-DD HH:mm:ss"
+					}
+				}
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"test": "npm run compile && node ./out/test/runTest.js",
+		"vsce-package": "vsce package"
+	},
+	"devDependencies": {
+		"@types/mocha": "^8.2.2",
+		"@types/node": "^15.0.1",
+		"@types/vscode": "^1.18.0",
+		"typescript": "^4.2.4",
+		"vsce": "^1.88.0",
+		"vscode-test": "^1.5.2",
+		"vso-node-api": "6.5.0"
+	},
+	"dependencies": {
+		"moment": "^2.29.1"
+	},
+	"__metadata": {
+		"id": "044de8a8-4977-4452-a006-4fdf9247e68c",
+		"publisherId": "bb95d25a-46fc-42f4-b8c2-e90d40894537",
+		"publisherDisplayName": "lpubsppop01",
+		"installedTimestamp": 1631167472334
+	}
+}
