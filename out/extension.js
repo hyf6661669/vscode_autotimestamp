@@ -25,6 +25,8 @@ class ExtensionCore {
     onWillSaveTextDocument(e) {
         if (!e.document.fileName.match(this.m_config.fileNamePattern))
             return;
+        if (e.reason == vscode.TextDocumentSaveReason.AfterDelay)
+            return;
         var edits = [];
         const lineIndices = this.getIndexRangeUntil(this.m_config.lineLimit, e.document.lineCount);
         for (const iLine of lineIndices) {
@@ -66,7 +68,7 @@ class ExtensionCore {
         if (startResult == null)
             return null;
         const iRangeStart = startResult.index + startResult[0].length;
-        const endResult = line.text.substr(iRangeStart).match(endPattern);
+        const endResult = line.text.substring(iRangeStart).match(endPattern);
         if (endResult == null)
             return null;
         const iRangeEnd = iRangeStart + endResult.index;
@@ -95,7 +97,7 @@ class ExtensionConfiguration {
     }
     get fileNamePattern() {
         if (this.m_fileNamePattern == null) {
-            this.m_fileNamePattern = new RegExp(this.getValue("filenamePattern", ".*"));
+            this.m_fileNamePattern = new RegExp(this.getValue("filenamePattern", "^(?!.*[/\\\\]\\.vscode[/\\\\]settings.json$)"));
         }
         return this.m_fileNamePattern;
     }
